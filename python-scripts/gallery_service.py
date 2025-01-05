@@ -2,15 +2,19 @@ from flask import Flask, request, jsonify
 from db_config import get_database
 import cloudinary
 import cloudinary.uploader
+from dotenv import load_dotenv
+import os
+import cloudinary
 
 app = Flask(__name__)
 db = get_database()
+load_dotenv()
 
 # Configure Cloudinary
 cloudinary.config(
-    cloud_name="domehr0qc",
-    api_key="375391317852181",
-    api_secret="VPH6-prBE9RMkN4SA-WwHhsH9WI"
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
 )
 
 @app.route('/upload_image', methods=['POST'])

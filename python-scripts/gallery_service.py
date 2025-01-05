@@ -8,9 +8,9 @@ db = get_database()
 
 # Configure Cloudinary
 cloudinary.config(
-    cloud_name="your_cloud_name",
-    api_key="your_api_key",
-    api_secret="your_api_secret"
+    cloud_name="domehr0qc",
+    api_key="375391317852181",
+    api_secret="VPH6-prBE9RMkN4SA-WwHhsH9WI"
 )
 
 @app.route('/upload_image', methods=['POST'])

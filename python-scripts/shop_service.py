@@ -68,4 +68,4 @@ def place_order():
     return jsonify({"message": "Order placed successfully!"}), 201
 
 if __name__ == '__main__':
-    app.run(port=5003)
+    app.run(host="0.0.0.0", port=5003)

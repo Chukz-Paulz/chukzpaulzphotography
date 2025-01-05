@@ -34,4 +34,4 @@ def get_images():
     return jsonify([{"url": img["url"], "genre": img["genre"]} for img in images])
 
 if __name__ == '__main__':
-    app.run(port=5002)
+    app.run(host="0.0.0.0", port=5002)

@@ -20,4 +20,4 @@ def redirect_get_images():
     return redirect("http://localhost:5002/get_images", code=307)
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(host="0.0.0.0", port=5000)

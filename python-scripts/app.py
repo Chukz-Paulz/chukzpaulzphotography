@@ -3,6 +3,11 @@ from generate_birthday_frame import create_frame
 
 app = Flask(__name__)
 
+# Default route for the home page
+@app.route('/')
+def home():
+    return "Welcome to Chukzpaulz Photography API! Use the /generate-frame endpoint to generate birthday frames."
+
 @app.route('/generate-frame', methods=['POST'])
 def generate_frame():
     data = request.json

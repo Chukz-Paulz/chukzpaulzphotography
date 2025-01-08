@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
 from db_config import get_database
+from bson import ObjectId
+from datetime import datetime
+from pymongo import MongoClient
 
 app = Flask(__name__)
 db = get_database()
@@ -8,23 +11,30 @@ orders_collection = db["orders"]
 
 @app.route('/add_product', methods=['POST'])
 def add_product():
-    data = request.json
-    name = data.get("name")
-    description = data.get("description")
-    price = data.get("price")
-    stock = data.get("stock")
-    image_url = data.get("image_url")
+    try:
+        data = request.json
+        name = data.get("name")
+        description = data.get("description")
+        price = data.get("price")
+        stock = data.get("stock")
+        image_url = data.get("image_url")
 
-    product = {
-        "name": name,
-        "description": description,
-        "price": price,
-        "stock": stock,
-        "image_url": image_url,
-        "created_at": datetime.now()
-    }
-    products_collection.insert_one(product)
-    return jsonify({"message": "Product added successfully!"}), 201
+        if not all([name, description, price, stock, image_url]):
+            return jsonify({"error": "Missing required fields!"}), 400
+
+        product = {
+            "name": name,
+            "description": description,
+            "price": price,
+            "stock": stock,
+            "image_url": image_url,
+            "created_at": datetime.now()
+        }
+        products_collection.insert_one(product)
+        return jsonify({"message": "Product added successfully!"}), 201
+    except Exception as e:
+        print(f"Error: {e}")  # Logs the error to the console
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/get_products', methods=['GET'])
 def get_products():
@@ -68,4 +78,4 @@ def place_order():
     return jsonify({"message": "Order placed successfully!"}), 201
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5003)
+    app.run(host="0.0.0.0", port=5003, debug=True)

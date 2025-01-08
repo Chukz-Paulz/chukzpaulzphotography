@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+import os
 
 def create_frame(user_name, output_file="birthday_frame.png"):
     """
@@ -8,6 +9,10 @@ def create_frame(user_name, output_file="birthday_frame.png"):
         user_name (str): The name to include in the frame.
         output_file (str): The path to save the output image.
     """
+    # Ensure output_file has a valid extension
+    if not output_file.endswith(".png"):
+        output_file = f"{os.path.splitext(output_file)[0]}.png"
+    
     # Define frame size and colors
     width, height = 800, 600
     background_color = (255, 255, 200)  # Light yellow
@@ -18,7 +23,11 @@ def create_frame(user_name, output_file="birthday_frame.png"):
     draw = ImageDraw.Draw(image)
     
     # Add a title
-    title_font = ImageFont.truetype("arial.ttf", 40)  # Update with your font path if needed
+    try:
+        title_font = ImageFont.truetype("arial.ttf", 40)  # Update with your font path if needed
+    except IOError:
+        print("Error: Font file 'arial.ttf' not found.")
+        return None
     title_text = "Happy Birthday!"
     title_width, title_height = draw.textsize(title_text, font=title_font)
     draw.text(((width - title_width) / 2, 100), title_text, fill=text_color, font=title_font)
@@ -38,3 +47,4 @@ def create_frame(user_name, output_file="birthday_frame.png"):
     # Save the image
     image.save(output_file)
     print(f"Birthday frame created: {output_file}")
+    return output_file

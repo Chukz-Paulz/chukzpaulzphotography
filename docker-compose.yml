@@ -1,0 +1,27 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"  # Expose frontend on port 8080
+    depends_on:
+      - backend
+      - python-backend
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"  # Expose backend on port 6000
+    restart: always
+
+  python-backend:
+    build:
+      context: ./python-scripts
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"  # Expose Python backend on port 5000
+    restart: always

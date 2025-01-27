@@ -1,5 +1,17 @@
-node_modules
+node_modules/
 build
 .dockerignore
 Dockerfile
 *.log
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore other irrelevant files
+.git/
+*.tmp

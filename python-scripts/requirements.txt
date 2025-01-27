@@ -1,5 +1,8 @@
-Flask==2.0.3
+Flask==2.2.5
 Flask-Cors==3.0.10
 pymongo[srv]==4.1.1
+dnspython==2.2.1
 python-dotenv==0.21.0
 cloudinary==1.29.0
+Werkzeug==2.3.8
+Pillow==9.4.0

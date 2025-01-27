@@ -5,9 +5,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:80"  # Expose frontend on port 8080
-    depends_on:
-      - backend
-      - python-backend
     restart: always
 
   backend:

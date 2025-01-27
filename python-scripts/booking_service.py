@@ -87,5 +87,16 @@ def close_day():
         logging.error(f"Error closing day: {str(e)}")
         return jsonify({"message": "An error occurred while closing the day."}), 500
 
+# New endpoint to get all bookings
+@app.route('/bookings', methods=['GET'])
+def get_bookings():
+    try:
+        bookings = bookings_collection.find()
+        bookings_list = [{"location": booking["location"], "date": booking["date"], "user_details": booking["user_details"]} for booking in bookings]
+        return jsonify(bookings_list)
+    except Exception as e:
+        logging.error(f"Error fetching bookings: {str(e)}")
+        return jsonify({"message": "An error occurred while fetching bookings."}), 500
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001)

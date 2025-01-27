@@ -5,7 +5,7 @@ const Gallery = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    axios.get('/photos/user')
+    axios.get('/get_images?genre=user')  // Assuming 'user' is the genre you're looking for
       .then((response) => setPhotos(response.data))
       .catch((error) => console.error(error));
   }, []);
@@ -15,9 +15,9 @@ const Gallery = () => {
       <h1 className="text-3xl font-bold">Your Photos</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         {photos.map((photo) => (
-          <div key={photo.id} className="relative">
-            <img src={photo.url} alt={photo.name} className="rounded shadow" />
-            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2">{photo.name}</p>
+          <div key={photo.url} className="relative">
+            <img src={photo.url} alt={photo.genre} className="rounded shadow" />
+            <p className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2">{photo.genre}</p>
           </div>
         ))}
       </div>

@@ -4,9 +4,13 @@ const path = require('path'); // For path operations
 const multer = require('multer'); // For handling file uploads
 const fs = require('fs'); // For filesystem operations
 const cloudinary = require('./cloudinaryConfig'); // Cloudinary configuration
+const cors = require('cors'); // Import cors middleware
+
 
 // Create the Express app
 const app = express();
+
+app.use(cors());
 
 // Middleware for parsing JSON (if needed for your API)
 app.use(express.json());
